@@ -8,15 +8,16 @@ Gem::Specification.new do |spec|
   spec.authors = ["Piotr Macuk"]
   spec.email = ["piotr@macuk.pl"]
 
-  spec.summary = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "TODO: Write a longer description or delete this line."
-  spec.homepage = "TODO: Put your gem's website or public repo URL here."
+  spec.summary = "Rails backup gem for compressing, encrypting, and uploading data to AWS S3."
+  spec.description = "ArchiVault is a Ruby gem for Rails applications that backs up files, logs, and databases " \
+                     "using paths and credentials provided by the app. It compresses and encrypts the data, " \
+                     "then uploads it securely to AWS S3."
+  spec.homepage = "https://github.com/macuk/archivault"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.3.0"
-  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+  spec.metadata["source_code_uri"] = "https://github.com/macuk/archivault"
+  spec.metadata["changelog_uri"] = "https://github.com/macuk/archivault/blob/main/CHANGELOG.md"
   spec.metadata["rubygems_mfa_required"] = "true"
 
   # Specify which files should be added to the gem when it is released.
