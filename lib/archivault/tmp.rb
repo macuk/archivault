@@ -4,7 +4,7 @@ module Archivault
   class Tmp
     attr_reader :path
 
-    def initialize(path: "/tmp")
+    def initialize(path = "/tmp")
       @path = defined?(Rails) ? Rails.root.join("tmp").to_s : path
     end
   end

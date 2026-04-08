@@ -6,7 +6,10 @@ module Archivault
   class TestTar < Minitest::Test
     def test_call_with_single_path
       mock = Minitest::Mock.new
-      mock.expect(:call, nil, %w[tar -czf /tmp/archive.tar.gz /app/log/app.log])
+      mock.expect(:call, nil) do |*args, **kwargs|
+        args == %w[tar -czf /tmp/archive.tar.gz /app/log/app.log] &&
+          kwargs == { out: File::NULL, err: File::NULL }
+      end
 
       tar = Tar.new(tar_path: "/tmp/archive.tar.gz", path_or_paths: "/app/log/app.log")
       Execute.stub(:new, ->(*) { mock }) { tar.call }
@@ -15,7 +18,10 @@ module Archivault
 
     def test_call_with_multiple_paths
       mock = Minitest::Mock.new
-      mock.expect(:call, nil, %w[tar -czf /tmp/archive.tar.gz /tmp/one /tmp/two])
+      mock.expect(:call, nil) do |*args, **kwargs|
+        args == %w[tar -czf /tmp/archive.tar.gz /tmp/one /tmp/two] &&
+          kwargs == { out: File::NULL, err: File::NULL }
+      end
 
       tar = Tar.new(tar_path: "/tmp/archive.tar.gz", path_or_paths: %w[/tmp/one /tmp/two])
       Execute.stub(:new, ->(*) { mock }) { tar.call }

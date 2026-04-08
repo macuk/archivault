@@ -2,7 +2,7 @@
 
 module Archivault
   class SqliteBackup
-    def initialize(database_path:)
+    def initialize(database_path)
       @database_path = database_path.to_s
       @timestamp = Timestamp.new.timestamp
       @tmp_path = Tmp.new.path
