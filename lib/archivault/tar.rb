@@ -16,7 +16,7 @@ module Archivault
         raise ArgumentError, "path must be a non-empty String" if path.nil? || path.to_s.empty?
       end
 
-      Execute.new.call("tar", "-czf", @tar_path, *@paths.map(&:to_s))
+      Execute.new.call("tar", "-czf", @tar_path, *@paths.map(&:to_s), out: File::NULL, err: File::NULL)
     end
   end
 end
