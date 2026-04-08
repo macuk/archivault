@@ -3,6 +3,7 @@
 require_relative "archivault/version"
 require_relative "archivault/timestamp"
 require_relative "archivault/execute"
+require_relative "archivault/sqlite_backup"
 
 module Archivault
   class Error < StandardError; end
