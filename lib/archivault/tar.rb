@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
-require "fileutils"
-
 module Archivault
-  class Clean
-    def initialize(path_or_paths)
+  class Tar
+    def initialize(tar_path:, path_or_paths:)
+      raise ArgumentError, "tar_path must not be nil" if tar_path.nil? || tar_path.to_s.empty?
+
+      @tar_path = tar_path.to_s
+
       @paths = Array(path_or_paths)
       raise ArgumentError, "path_or_paths must not be empty" if @paths.empty?
     end
@@ -12,9 +14,9 @@ module Archivault
     def call
       @paths.each do |path|
         raise ArgumentError, "path must be a non-empty String" if path.nil? || path.to_s.empty?
-
-        FileUtils.rm(path.to_s)
       end
+
+      Execute.new.call("tar", "-czf", @tar_path, *@paths.map(&:to_s))
     end
   end
 end
