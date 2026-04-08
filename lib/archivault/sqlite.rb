@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Archivault
-  class SqliteBackup
+  class Sqlite
     def initialize(database_path:, backup_path:)
       @database_path = database_path.to_s
       @backup_path = backup_path.to_s
