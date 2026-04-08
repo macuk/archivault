@@ -9,11 +9,11 @@ module Archivault
     end
 
     def test_nil_status
-      assert_raises(Error) { Execute.new.call("false") }
+      assert_raises(ExecuteError) { Execute.new.call("false") }
     end
 
     def test_false_status
-      assert_raises(Error) { Execute.new.call("ruby", "-e", "exit(1)") }
+      assert_raises(ExecuteError) { Execute.new.call("ruby", "-e", "exit(1)") }
     end
   end
 end

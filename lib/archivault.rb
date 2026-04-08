@@ -8,5 +8,6 @@ require_relative "archivault/clean"
 
 module Archivault
   class Error < StandardError; end
+  class ExecuteError < Error; end
   # Your code goes here...
 end
