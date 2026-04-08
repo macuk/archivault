@@ -5,6 +5,9 @@ require_relative "archivault/timestamp"
 require_relative "archivault/execute"
 require_relative "archivault/sqlite"
 require_relative "archivault/clean"
+require_relative "archivault/tar"
+require_relative "archivault/tmp"
+require_relative "archivault/sqlite_backup"
 
 module Archivault
   class Error < StandardError; end
