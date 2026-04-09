@@ -31,37 +31,37 @@ module Archivault
     def test_call_raises_when_paths_array_is_empty
       error = assert_raises(ArgumentError) { Tar.new(tar_path: "/tmp/archive.tar.gz", path_or_paths: []).call }
 
-      assert_equal("path_or_paths must not be empty", error.message)
+      assert_equal("path_or_paths is required", error.message)
     end
 
     def test_call_raises_when_tar_path_is_nil
       error = assert_raises(ArgumentError) { Tar.new(tar_path: nil, path_or_paths: "/app/log/app.log").call }
 
-      assert_equal("tar_path must not be nil", error.message)
+      assert_equal("tar_path is required", error.message)
     end
 
     def test_call_raises_when_tar_path_is_empty
       error = assert_raises(ArgumentError) { Tar.new(tar_path: "", path_or_paths: "/app/log/app.log").call }
 
-      assert_equal("tar_path must not be nil", error.message)
+      assert_equal("tar_path is required", error.message)
     end
 
     def test_call_raises_when_input_is_nil
       error = assert_raises(ArgumentError) { Tar.new(tar_path: "/tmp/archive.tar.gz", path_or_paths: nil).call }
 
-      assert_equal("path_or_paths must not be empty", error.message)
+      assert_equal("path_or_paths is required", error.message)
     end
 
     def test_call_raises_when_path_is_nil
       error = assert_raises(ArgumentError) { Tar.new(tar_path: "/tmp/archive.tar.gz", path_or_paths: [nil]).call }
 
-      assert_equal("path must be a non-empty String", error.message)
+      assert_equal("path is required", error.message)
     end
 
     def test_call_raises_when_path_is_empty
       error = assert_raises(ArgumentError) { Tar.new(tar_path: "/tmp/archive.tar.gz", path_or_paths: "").call }
 
-      assert_equal("path must be a non-empty String", error.message)
+      assert_equal("path is required", error.message)
     end
   end
 end

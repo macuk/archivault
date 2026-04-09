@@ -27,25 +27,25 @@ module Archivault
     def test_call_raises_when_paths_array_is_empty
       error = assert_raises(ArgumentError) { Clean.new([]).call }
 
-      assert_equal("path_or_paths must not be empty", error.message)
+      assert_equal("path_or_paths is required", error.message)
     end
 
     def test_call_raises_when_input_is_nil
       error = assert_raises(ArgumentError) { Clean.new(nil).call }
 
-      assert_equal("path_or_paths must not be empty", error.message)
+      assert_equal("path_or_paths is required", error.message)
     end
 
     def test_call_raises_when_path_is_nil
       error = assert_raises(ArgumentError) { Clean.new([nil]).call }
 
-      assert_equal("path must be a non-empty String", error.message)
+      assert_equal("path is required", error.message)
     end
 
     def test_call_raises_when_path_is_empty
       error = assert_raises(ArgumentError) { Clean.new("").call }
 
-      assert_equal("path must be a non-empty String", error.message)
+      assert_equal("path is required", error.message)
     end
   end
 end

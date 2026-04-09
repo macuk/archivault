@@ -3,17 +3,23 @@
 require "test_helper"
 
 module Archivault
+  # rubocop: disable Metrics/ClassLength
+  # rubocop: disable Metrics/MethodLength
   class TestS3 < Minitest::Test
+    def setup
+      override_aws_s3_constants
+    end
+
     def test_initialize_raises_when_file_path_is_nil
       error = assert_raises(ArgumentError) { S3.new(nil) }
 
-      assert_equal("file_path must not be nil", error.message)
+      assert_equal("file_path is required", error.message)
     end
 
     def test_initialize_raises_when_file_path_is_empty
       error = assert_raises(ArgumentError) { S3.new("") }
 
-      assert_equal("file_path must not be nil", error.message)
+      assert_equal("file_path is required", error.message)
     end
 
     def test_call_uploads_file_with_expected_bucket_key
@@ -39,7 +45,7 @@ module Archivault
           S3.new("/tmp/my-app-2025-03-archive.tar.gz").call(**params)
         end
 
-        assert_equal("#{argument} is blank", error.message)
+        assert_equal("#{argument} is required", error.message)
       end
     end
 
@@ -52,7 +58,7 @@ module Archivault
           S3.new("/tmp/my-app-2025-03-archive.tar.gz").call(**params)
         end
 
-        assert_equal("#{argument} is blank", error.message)
+        assert_equal("#{argument} is required", error.message)
       end
     end
 
@@ -120,5 +126,19 @@ module Archivault
         transfer_manager
       end
     end
+
+    def override_aws_s3_constants
+      remove_aws_s3_constant(:Client)
+      remove_aws_s3_constant(:TransferManager)
+
+      Aws::S3.const_set(:Client, Class.new)
+      Aws::S3.const_set(:TransferManager, Class.new)
+    end
+
+    def remove_aws_s3_constant(name)
+      Aws::S3.send(:remove_const, name) if Aws::S3.const_defined?(name, false) || Aws::S3.autoload?(name)
+    end
   end
+  # rubocop: enable Metrics/MethodLength
+  # rubocop: enable Metrics/ClassLength
 end

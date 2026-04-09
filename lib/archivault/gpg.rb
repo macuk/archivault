@@ -3,13 +3,13 @@
 module Archivault
   class Gpg
     def initialize(file_path)
-      raise ArgumentError, "file_path must not be nil" if file_path.nil? || file_path.to_s.empty?
+      raise ArgumentError, "file_path is required" if file_path.nil? || file_path.to_s.empty?
 
       @file_path = file_path.to_s
     end
 
     def call(passphrase)
-      raise ArgumentError, "passphrase is blank" if passphrase.to_s.strip.empty?
+      raise ArgumentError, "passphrase is required" if passphrase.to_s.strip.empty?
 
       Execute.new.call(
         "gpg",

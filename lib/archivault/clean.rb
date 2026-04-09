@@ -6,12 +6,12 @@ module Archivault
   class Clean
     def initialize(path_or_paths)
       @paths = Array(path_or_paths)
-      raise ArgumentError, "path_or_paths must not be empty" if @paths.empty?
+      raise ArgumentError, "path_or_paths is required" if @paths.empty?
     end
 
     def call
       @paths.each do |path|
-        raise ArgumentError, "path must be a non-empty String" if path.nil? || path.to_s.empty?
+        raise ArgumentError, "path is required" if path.nil? || path.to_s.empty?
 
         FileUtils.rm(path.to_s)
       end

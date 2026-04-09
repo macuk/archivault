@@ -5,7 +5,7 @@ require "aws-sdk-s3"
 module Archivault
   class S3
     def initialize(file_path)
-      raise ArgumentError, "file_path must not be nil" if file_path.nil? || file_path.to_s.empty?
+      raise ArgumentError, "file_path is required" if file_path.nil? || file_path.to_s.empty?
 
       @file_path = file_path.to_s
     end
@@ -34,7 +34,7 @@ module Archivault
         secret_access_key:,
         bucket:
       }.each do |name, value|
-        raise ArgumentError, "#{name} is blank" if value.nil? || value.to_s.empty?
+        raise ArgumentError, "#{name} is required" if value.nil? || value.to_s.empty?
       end
     end
   end
