@@ -18,7 +18,7 @@ If bundler is not being used to manage dependencies, install the gem by executin
 gem install archivault
 ```
 
-## Usage
+## Ruby usage
 
 ### SQLite database backup
 
@@ -53,6 +53,44 @@ s3_setup = {
 ping_url = "https://example.com/ping" # optional parameter
 
 Archivault::LogsBackup.new(log_path_or_paths:, gpg_passphrase:, s3_setup:, ping_url:).call
+```
+
+## Rais usage
+
+### SQLite database backup
+
+```ruby
+# in config/credentials.yml.enc 
+# archivault:
+#   gpg_passphrase: password
+#   s3_setup:
+#     region: region
+#     access_key_id: access_key_id
+#     secret_access_key: secret_access_key
+#     bucket: bucket
+params = {
+  database_path: Rails.root.join("storage/production.sqlite3"),
+  ping_url: "https://example.com/ping" # optional parameter
+}.merge(Rails.application.credentials.archivault)
+Archivault::SqliteBackup.new(**params).call
+```
+
+### Logs backup
+
+```ruby
+# in config/credentials.yml.enc 
+# archivault:
+#   gpg_passphrase: password
+#   s3_setup:
+#     region: region
+#     access_key_id: access_key_id
+#     secret_access_key: secret_access_key
+#     bucket: bucket
+params = {
+  log_path_or_paths: Rails.root.join("log", "production.log.1"),
+  ping_url: "https://example.com/ping" # optional parameter
+}.merge(Rails.application.credentials.archivault)
+Archivault::LogsBackup.new(**params).call
 ```
 
 ## Development
