@@ -1,28 +1,39 @@
 # Archivault
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/archivault`. To experiment with that code, run `bin/console` for an interactive prompt.
+ArchiVault is a Ruby gem for Rails applications that backs up files, logs, and databases
+using paths and credentials provided by the app. It compresses and encrypts the data,
+then uploads it securely to AWS S3.
 
 ## Installation
-
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
 
 Install the gem and add to the application's Gemfile by executing:
 
 ```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+bundle add archivault
 ```
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
 ```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+gem install archivault
 ```
 
 ## Usage
 
-TODO: Write usage instructions here
+### SQLite database backup
+
+```ruby
+database_path = "/home/user/storage/production.sqlite3"
+gpg_passphrase = "password"
+s3_setup = { 
+  region: "region", 
+  access_key_id: "access_key_id",  
+  secret_access_key: "secret_access_key", 
+  bucket: "bucket"
+}
+
+Archivault::SqliteBackup.new(database_path:, gpg_passphrase:, s3_setup:).call
+```
 
 ## Development
 
@@ -32,7 +43,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/archivault. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/archivault/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/macuk/archivault. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/archivault/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
