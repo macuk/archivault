@@ -2,6 +2,14 @@
 
 module Archivault
   class SqliteBackup
+    # Parameters
+    #   - database_path: Path to the SQLite3 database file
+    #   - gpg_passphrase: GPG passphrase to encrypt the backup file
+    #   - s3_setup: Hash of S3 setup options:
+    #     - region: AWS region
+    #     - access_key_id: AWS access key ID
+    #     - secret_access_key: AWS secret access key
+    #     - bucket: S3 bucket name
     def initialize(database_path:, gpg_passphrase:, s3_setup:)
       raise ArgumentError, "database_path is required" if database_path.nil? || database_path.to_s.empty?
       raise ArgumentError, "gpg_passphrase is required" if gpg_passphrase.nil? || gpg_passphrase.to_s.empty?
@@ -23,7 +31,7 @@ module Archivault
       Gpg.new(@tar_path).call(@gpg_passphrase)
       S3.new(@gpg_path).call(**@s3_setup)
     ensure
-      Clean.new([@backup_path, @tar_path]).call
+      Clean.new([@backup_path, @tar_path, @gpg_path]).call
     end
   end
 end
