@@ -8,10 +8,12 @@ require_relative "archivault/clean"
 require_relative "archivault/tar"
 require_relative "archivault/tmp"
 require_relative "archivault/gpg"
+require_relative "archivault/s3"
 require_relative "archivault/sqlite_backup"
 
 module Archivault
   class Error < StandardError; end
   class ExecuteError < Error; end
+  class S3Error < Error; end
   # Your code goes here...
 end
