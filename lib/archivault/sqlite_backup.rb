@@ -11,9 +11,6 @@ module Archivault
     #     - secret_access_key: AWS secret access key
     #     - bucket: S3 bucket name
     def initialize(database_path:, gpg_passphrase:, s3_setup:)
-      raise ArgumentError, "database_path is required" if database_path.nil? || database_path.to_s.empty?
-      raise ArgumentError, "gpg_passphrase is required" if gpg_passphrase.nil? || gpg_passphrase.to_s.empty?
-
       @database_path = database_path.to_s
       @gpg_passphrase = gpg_passphrase.to_s
       @s3_setup = s3_setup
