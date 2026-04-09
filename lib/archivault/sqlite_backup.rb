@@ -10,10 +10,11 @@ module Archivault
     #     - access_key_id: AWS access key ID
     #     - secret_access_key: AWS secret access key
     #     - bucket: S3 bucket name
-    def initialize(database_path:, gpg_passphrase:, s3_setup:)
+    def initialize(database_path:, gpg_passphrase:, s3_setup:, ping_url: nil)
       @database_path = database_path.to_s
       @gpg_passphrase = gpg_passphrase.to_s
       @s3_setup = s3_setup
+      @ping_url = ping_url
 
       @timestamp = Timestamp.new.timestamp
       @tmp_path = Tmp.new.path
@@ -27,6 +28,7 @@ module Archivault
       Tar.new(tar_path: @tar_path, path_or_paths: @backup_path).call
       Gpg.new(@tar_path).call(@gpg_passphrase)
       S3.new(@gpg_path).call(**@s3_setup)
+      Ping.new(@ping_url).call if @ping_url
     ensure
       Clean.new([@backup_path, @tar_path, @gpg_path]).call
     end
