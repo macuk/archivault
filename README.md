@@ -31,8 +31,9 @@ s3_setup = {
   secret_access_key: "secret_access_key", 
   bucket: "bucket"
 }
+ping_url = "https://example.com/ping" # optional parameter
 
-Archivault::SqliteBackup.new(database_path:, gpg_passphrase:, s3_setup:).call
+Archivault::SqliteBackup.new(database_path:, gpg_passphrase:, s3_setup:, ping_url:).call
 ```
 
 ### Logs backup
@@ -49,8 +50,9 @@ s3_setup = {
   secret_access_key: "secret_access_key", 
   bucket: "bucket"
 }
+ping_url = "https://example.com/ping" # optional parameter
 
-Archivault::LogsBackup.new(log_path_or_paths:, gpg_passphrase:, s3_setup:).call
+Archivault::LogsBackup.new(log_path_or_paths:, gpg_passphrase:, s3_setup:, ping_url:).call
 ```
 
 ## Development
