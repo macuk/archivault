@@ -23,7 +23,7 @@ gem install archivault
 ### SQLite database backup
 
 ```ruby
-database_path = "/home/user/storage/production.sqlite3"
+database_path = "/home/user/app/storage/production.sqlite3"
 gpg_passphrase = "password"
 s3_setup = { 
   region: "region", 
@@ -33,6 +33,24 @@ s3_setup = {
 }
 
 Archivault::SqliteBackup.new(database_path:, gpg_passphrase:, s3_setup:).call
+```
+
+### Logs backup
+
+```ruby
+log_path_or_paths = %w[
+  /home/user/app/log/production.log.1
+  /home/user/app/log/nginx_access.log.1
+]
+gpg_passphrase = "password"
+s3_setup = { 
+  region: "region", 
+  access_key_id: "access_key_id",  
+  secret_access_key: "secret_access_key", 
+  bucket: "bucket"
+}
+
+Archivault::LogsBackup.new(log_path_or_paths:, gpg_passphrase:, s3_setup:).call
 ```
 
 ## Development
