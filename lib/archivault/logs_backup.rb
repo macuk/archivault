@@ -3,7 +3,7 @@
 module Archivault
   class LogsBackup
     # Parameters
-    #   - database_path: Path to the SQLite3 database file
+    #   - log_path_or_paths: Path or array of paths to the log files to back up
     #   - gpg_passphrase: GPG passphrase to encrypt the backup file
     #   - s3_setup: Hash of S3 setup options:
     #     - region: AWS region

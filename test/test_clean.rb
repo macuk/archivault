@@ -7,7 +7,7 @@ module Archivault
     def test_call_removes_single_path
       removed_paths = []
 
-      FileUtils.stub(:rm, ->(path) { removed_paths << path }) do
+      FileUtils.stub(:rm_f, ->(path) { removed_paths << path }) do
         Clean.new("/tmp/archive.tar.gz").call
       end
 
@@ -17,7 +17,7 @@ module Archivault
     def test_call_removes_all_paths_from_array
       removed_paths = []
 
-      FileUtils.stub(:rm, ->(path) { removed_paths << path }) do
+      FileUtils.stub(:rm_f, ->(path) { removed_paths << path }) do
         Clean.new(%w[/tmp/one /tmp/two]).call
       end
 

@@ -13,7 +13,7 @@ module Archivault
       @paths.each do |path|
         raise ArgumentError, "path is required" if path.nil? || path.to_s.empty?
 
-        FileUtils.rm(path.to_s)
+        FileUtils.rm_f(path.to_s)
       end
     end
   end
