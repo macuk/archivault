@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# To decrypt encrypted file, use:
+# gpg --output output.txt --decrypt output.txt.gpg
 module Archivault
   class Gpg
     def initialize(file_path)
