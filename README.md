@@ -36,6 +36,22 @@ ping_url = "https://example.com/ping" # optional parameter
 Archivault::SqliteBackup.new(database_path:, gpg_passphrase:, s3_setup:, ping_url:).call
 ```
 
+### PostgreSQL database backup
+
+```ruby
+database_url = "postgres://user:password@localhost:5432/mydb"
+gpg_passphrase = "password"
+s3_setup = { 
+  region: "region", 
+  access_key_id: "access_key_id",  
+  secret_access_key: "secret_access_key", 
+  bucket: "bucket"
+}
+ping_url = "https://example.com/ping" # optional parameter
+
+Archivault::PostgresqlBackup.new(database_url:, gpg_passphrase:, s3_setup:, ping_url:).call
+```
+
 ### Logs backup
 
 ```ruby
@@ -55,7 +71,7 @@ ping_url = "https://example.com/ping" # optional parameter
 Archivault::LogsBackup.new(log_path_or_paths:, gpg_passphrase:, s3_setup:, ping_url:).call
 ```
 
-## Rais usage
+## Rails usage
 
 ### SQLite database backup
 
@@ -73,6 +89,24 @@ params = {
   ping_url: "https://example.com/ping" # optional parameter
 }.merge(Rails.application.credentials.archivault)
 Archivault::SqliteBackup.new(**params).call
+```
+
+### PostgreSQL database backup
+
+```ruby
+# in config/credentials.yml.enc 
+# archivault:
+#   gpg_passphrase: password
+#   s3_setup:
+#     region: region
+#     access_key_id: access_key_id
+#     secret_access_key: secret_access_key
+#     bucket: bucket
+params = {
+  database_url: ENV["DATABASE_URL"],
+  ping_url: "https://example.com/ping" # optional parameter
+}.merge(Rails.application.credentials.archivault)
+Archivault::PostgresqlBackup.new(**params).call
 ```
 
 ### Logs backup

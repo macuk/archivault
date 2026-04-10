@@ -10,8 +10,10 @@ require_relative "archivault/tmp"
 require_relative "archivault/gpg"
 require_relative "archivault/s3"
 require_relative "archivault/ping"
+require_relative "archivault/pg_dump"
 require_relative "archivault/sqlite_backup"
 require_relative "archivault/logs_backup"
+require_relative "archivault/postgresql_backup"
 
 module Archivault
   class Error < StandardError; end
