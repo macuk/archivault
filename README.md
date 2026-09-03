@@ -32,8 +32,9 @@ s3_setup = {
   bucket: "bucket"
 }
 ping_url = "https://example.com/ping" # optional parameter
+filename = "production" # optional prefix; timestamp is appended
 
-Archivault::SqliteBackup.new(database_path:, gpg_passphrase:, s3_setup:, ping_url:).call
+Archivault::SqliteBackup.new(database_path:, gpg_passphrase:, s3_setup:, ping_url:, filename:).call
 ```
 
 ### PostgreSQL database backup
@@ -48,8 +49,9 @@ s3_setup = {
   bucket: "bucket"
 }
 ping_url = "https://example.com/ping" # optional parameter
+filename = "production" # optional prefix; timestamp is appended
 
-Archivault::PostgresqlBackup.new(database_url:, gpg_passphrase:, s3_setup:, ping_url:).call
+Archivault::PostgresqlBackup.new(database_url:, gpg_passphrase:, s3_setup:, ping_url:, filename:).call
 ```
 
 ### Logs backup
@@ -86,7 +88,8 @@ Archivault::LogsBackup.new(log_path_or_paths:, gpg_passphrase:, s3_setup:, ping_
 #     bucket: bucket
 params = {
   database_path: Rails.root.join("storage/production.sqlite3"),
-  ping_url: "https://example.com/ping" # optional parameter
+  ping_url: "https://example.com/ping", # optional parameter
+  filename: "production" # optional prefix; timestamp is appended
 }.merge(Rails.application.credentials.archivault)
 Archivault::SqliteBackup.new(**params).call
 ```
@@ -104,7 +107,8 @@ Archivault::SqliteBackup.new(**params).call
 #     bucket: bucket
 params = {
   database_url: ENV["DATABASE_URL"],
-  ping_url: "https://example.com/ping" # optional parameter
+  ping_url: "https://example.com/ping", # optional parameter
+  filename: "production" # optional prefix; timestamp is appended
 }.merge(Rails.application.credentials.archivault)
 Archivault::PostgresqlBackup.new(**params).call
 ```

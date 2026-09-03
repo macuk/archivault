@@ -10,7 +10,8 @@ module Archivault
     #     - access_key_id: AWS access key ID
     #     - secret_access_key: AWS secret access key
     #     - bucket: S3 bucket name
-    def initialize(database_path:, gpg_passphrase:, s3_setup:, ping_url: nil)
+    #   - filename: Filename prefix for the backup (defaults to database)
+    def initialize(database_path:, gpg_passphrase:, s3_setup:, ping_url: nil, filename: nil)
       @database_path = database_path.to_s
       @gpg_passphrase = gpg_passphrase.to_s
       @s3_setup = s3_setup
@@ -18,8 +19,9 @@ module Archivault
 
       @timestamp = Timestamp.new.timestamp
       @tmp_path = Tmp.new.path
-      @backup_path = "#{@tmp_path}/database-#{@timestamp}.sqlite3"
-      @tar_path = "#{@tmp_path}/database-#{@timestamp}.tgz"
+      backup_filename = "#{filename || "database"}-#{@timestamp}"
+      @backup_path = "#{@tmp_path}/#{backup_filename}.sqlite3"
+      @tar_path = "#{@tmp_path}/#{backup_filename}.tgz"
       @gpg_path = "#{@tar_path}.gpg"
     end
 
