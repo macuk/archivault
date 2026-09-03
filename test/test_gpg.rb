@@ -3,7 +3,7 @@
 require "test_helper"
 
 module Archivault
-  # rubocop: disable Metrics/MethodLength
+  # rubocop: disable-next Metrics/MethodLength
   class TestGpg < Minitest::Test
     def test_initialize_raises_when_file_path_is_nil
       error = assert_raises(ArgumentError) { Gpg.new(nil) }
@@ -47,5 +47,4 @@ module Archivault
       mock.verify
     end
   end
-  # rubocop: enable Metrics/MethodLength
 end

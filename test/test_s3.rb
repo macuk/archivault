@@ -4,7 +4,7 @@ require "test_helper"
 
 module Archivault
   # rubocop: disable Metrics/ClassLength
-  # rubocop: disable Metrics/MethodLength
+  # rubocop: disable-next Metrics/MethodLength
   class TestS3 < Minitest::Test
     def setup
       override_aws_s3_constants
@@ -139,6 +139,5 @@ module Archivault
       Aws::S3.send(:remove_const, name) if Aws::S3.const_defined?(name, false) || Aws::S3.autoload?(name)
     end
   end
-  # rubocop: enable Metrics/MethodLength
   # rubocop: enable Metrics/ClassLength
 end
