@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.2.1] - 2026-09-03
+
+- Allow custom database backup filename prefixes
+
 ## [0.2.0] - 2026-04-10
 
 - Add PostgresqlBackup
