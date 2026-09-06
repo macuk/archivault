@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # To restore a database from a dump file, use:
-# pg_restore --no-owner -d DATABASE_URL database.dump
+# pg_restore --clean --if-exists --no-owner --no-acl --role=db-role -U postgres -d db-name /tmp/db.dump
 module Archivault
   class PgDump
     def initialize(database_url:, backup_path:)
