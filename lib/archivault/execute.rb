@@ -4,8 +4,8 @@ require "English"
 
 module Archivault
   class Execute
-    def call(command, *)
-      status = system(command, *)
+    def call(command, *, env: {}, **)
+      status = system(env, command, *, **)
       raise ExecuteError, "#{command} could not be executed" if status.nil?
       raise ExecuteError, "#{command} failed with exit code #{$CHILD_STATUS&.exitstatus}" unless status
 

@@ -12,8 +12,23 @@ module Archivault
       @backup_path = backup_path.to_s
     end
 
+    # The password goes to pg_dump through PGPASSWORD, not through the command line:
+    # arguments of a running process are readable by every local user (ps, /proc/<pid>/cmdline).
     def call
-      Execute.new.call("pg_dump", "-Fc", "-f", @backup_path, @database_url)
+      uri = parse_database_url
+      password = URI.decode_uri_component(uri.password) if uri.password && !uri.password.empty?
+      uri.password = nil
+      env = password ? { "PGPASSWORD" => password } : {}
+      Execute.new.call("pg_dump", "-Fc", "-f", @backup_path, uri.to_s, env: env)
+    end
+
+    private
+
+    def parse_database_url
+      URI.parse(@database_url)
+    rescue URI::InvalidURIError
+      # URI::InvalidURIError quotes the whole input, password included - re-raise without it.
+      raise "Invalid database URL: percent-encode special characters in the password", cause: nil
     end
   end
 end
