@@ -1,4 +1,8 @@
-## [Unreleased]
+## [0.3.1] - 2026-11-25
+
+- Update project development dependencies
+
+## [0.3.0] - 2026-11-25
 
 - Add an unguessable random suffix to backup file names, so a PutObject-only S3 key cannot target (overwrite) existing backups
 - Pass decoded PostgreSQL URL passwords to pg_dump through PGPASSWORD instead of command-line arguments, and prevent password leaks in invalid URL errors

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    archivault (0.3.0)
+    archivault (0.3.1)
       aws-sdk-s3 (~> 1.219)
       rexml (~> 3.4)
 
@@ -156,7 +156,7 @@ DEPENDENCIES
 
 CHECKSUMS
   addressable (2.10.0) sha256=5e13b9c001adf01dd65ad6e0d2a91d2bc07885c0ff2b83f48cbcd95e08d9de62
-  archivault (0.3.0)
+  archivault (0.3.1)
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
   aws-eventstream (1.4.1) sha256=ceb6a99c61df4bb00344e54aed0351574beca24f87a0d1487d1d2ed80929ce96
   aws-partitions (1.1311.0) sha256=de5d8bb04d3f184317e7c02bbf1ee4ee5f5095fe1461b8fbd618ebba607a6f93
