@@ -17,9 +17,8 @@ module Archivault
       @s3_setup = s3_setup
       @ping_url = ping_url
 
-      @timestamp = Timestamp.new.timestamp
       @tmp_path = Tmp.new.path
-      backup_filename = "#{filename || "database"}-#{@timestamp}"
+      backup_filename = Timestamp.new.backup_name(filename || "database")
       @backup_path = "#{@tmp_path}/#{backup_filename}.dump"
       @tar_path = "#{@tmp_path}/#{backup_filename}.tgz"
       @gpg_path = "#{@tar_path}.gpg"
